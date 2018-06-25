@@ -101,7 +101,7 @@ public class FeaturesService {
 
     public boolean isLastCharAlpha(String textLine) {
         String text = getText(textLine);
-        return Character.isLetter(text.charAt(text.length()));
+        return Character.isLetter(text.charAt(text.length() -1));
     }
 
     public boolean isAllWordsInitCap(String textLine) {
@@ -112,6 +112,11 @@ public class FeaturesService {
     public boolean containsBetweenTwoAndThreeWords(String textLine) {
         String[] words = getText(textLine).split("\\s+");
         return words.length >= 2 && words.length <= 3;
+    }
+
+    public boolean hasMoreThanTwoWords(String textLine){
+        String[] words = getText(textLine).split("\\s+");
+        return words.length > 2;
     }
 
     public Double getFontSize(String textLine) {
@@ -145,5 +150,36 @@ public class FeaturesService {
             finalText = matcher.group(1);
         }
         return finalText;
+    }
+
+    public Double getX(String text){
+        Double X = 0.0;
+        Pattern pattern = Pattern.compile("<X>(.+?)</X>");
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) {
+            X = Double.parseDouble(matcher.group(1));
+        }
+        return X;
+    }
+
+    public Double getY(String text){
+        Double Y = 0.0;
+        String regex = "<Y>(.+?)</Y>";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) {
+            Y = Double.parseDouble(matcher.group(1));
+        }
+        return Y;
+    }
+
+    public Double distanceBetweenOriginAndAPoint(String text){
+        return Math.sqrt
+                (Math.pow(getX(text), 2) + Math.pow(getY(text), 2));
+    }
+
+    public double distanceBetweenTwoPoints(String firstPoint, String secondPoint){
+        return Math.sqrt(Math.pow((getX(firstPoint) - getX(secondPoint)), 2)
+                + Math.pow((getY(firstPoint) - getY(secondPoint)), 2));
     }
 }

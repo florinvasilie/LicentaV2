@@ -8,12 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TitleFeaturesRepository extends CrudRepository<TitleFeatures, Long> {
-    Long countByisGreaterThanMeanMaxTrue();
-
-    Long countByisTitleTrue();
-
-//    Double countByisTitleFalse();
-
 
     @Query("select count (isTitle) from TitleFeatures  where isTitle = (:isTitle)")
     Double findIsTitle(@Param("isTitle") boolean isTitle);
@@ -42,5 +36,9 @@ public interface TitleFeaturesRepository extends CrudRepository<TitleFeatures, L
 
     @Query("select count(isLengthLowerThanLengthMean) from TitleFeatures where isLengthLowerThanLengthMean =(:isLengthLowerThanLengthMean) and isTitle =(:isTitle)")
     Double findIsLengthLowerThanLengthMeanAndIsTitle(@Param("isLengthLowerThanLengthMean") boolean isLengthLowerThanLengthMean, @Param("isTitle") boolean isTile);
+
+    @Query("select count(hasMoreThanTwoWords) from TitleFeatures where hasMoreThanTwoWords =(:hasMoreThanTwoWords) and isTitle =(:isTitle)")
+    Double findHasMoreThanTwoWordsAndIsTitle(@Param("hasMoreThanTwoWords") boolean hasMoreThanTwoWords, @Param("isTitle") boolean isTile);
+
 
 }

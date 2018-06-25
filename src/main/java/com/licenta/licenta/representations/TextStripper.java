@@ -18,9 +18,13 @@ public class TextStripper extends PDFTextStripper {
         for (TextPosition position : textPositions){
             String baseFont = position.getFont().getName();
             float fontSize = position.getFontSizeInPt();
-            if (baseFont != null && !baseFont.equals(prevBaseFont)) {
+            float X = position.getX();
+            float Y = position.getY();
 
-                builder.append("<Font>").append(baseFont).append("</Font>").append("<Size>").append(Float.toString(fontSize)).append("</Size>");
+            if (baseFont != null && !baseFont.equals(prevBaseFont)) {
+                builder.append("<Font>").append(baseFont).append("</Font>").append("<Size>")
+                        .append(Float.toString(fontSize)).append("</Size>");
+                builder.append("<X>").append(X).append("</X>").append("<Y>").append(Y).append("</Y>");
                 builder.append("<Text>").append(text).append("</Text>");
                 break;
             }

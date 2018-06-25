@@ -3,8 +3,8 @@ package com.licenta.licenta.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TITLE_FEATURES")
-public class TitleFeatures {
+@Table(name = "AUTHOR_FEATURES")
+public class AuthorFeatures {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,26 +28,26 @@ public class TitleFeatures {
     @Column(name = "IS_BOLD")
     private boolean isBold;
 
-    @Column(name = "IS_ITALIC")
-    private boolean isItalic;
-
     @Column(name = "IS_IN_FIRST_10_ROWS")
     private boolean isInFirst10Rows;
 
     @Column(name = "IS_ALPHA")
     private boolean isAlpha;
 
-    @Column(name = "CONTAINS_QUOTATION_MARK")
-    private boolean containsQuotationMark;
+    @Column(name = "IS_FIRST_CHAR_ALPHA")
+    private boolean isFirstCharAlpha;
 
-    @Column(name = "IS_LENGTH_LOWER_THAN_LENGTH_MEAN")
-    private boolean isLengthLowerThanLengthMean;
+    @Column(name = "IS_LAST_CHAR_ALPHA")
+    private boolean isLastCharAlpha;
 
-    @Column(name = "HAS_MORE_THAN_TWO_WORDS")
-    private boolean hasMoreThanTwoWords;
+    @Column(name = "IS_ALL_WORDS_INIT_CAP")
+    private boolean isAllWordsInitCap;
 
-    @Column(name = "IS_TITLE")
-    private boolean isTitle;
+    @Column(name = "CONTAINS_BETWEEN_2_AND_3_WORDS")
+    private boolean containsBetweenTwoAndThreeWords;
+
+    @Column(name = "IS_AUTHOR")
+    private boolean isAuthor;
 
     public Long getId() {
         return id;
@@ -105,14 +105,6 @@ public class TitleFeatures {
         isBold = bold;
     }
 
-    public boolean isItalic() {
-        return isItalic;
-    }
-
-    public void setItalic(boolean italic) {
-        isItalic = italic;
-    }
-
     public boolean isInFirst10Rows() {
         return isInFirst10Rows;
     }
@@ -129,35 +121,43 @@ public class TitleFeatures {
         isAlpha = alpha;
     }
 
-    public boolean isContainsQuotationMark() {
-        return containsQuotationMark;
+    public boolean isFirstCharAlpha() {
+        return isFirstCharAlpha;
     }
 
-    public void setContainsQuotationMark(boolean containsQuotationMark) {
-        this.containsQuotationMark = containsQuotationMark;
+    public void setFirstCharAlpha(boolean firstCharAlpha) {
+        isFirstCharAlpha = firstCharAlpha;
     }
 
-    public boolean isLengthLowerThanLengthMean() {
-        return isLengthLowerThanLengthMean;
+    public boolean isLastCharAlpha() {
+        return isLastCharAlpha;
     }
 
-    public void setLengthLowerThanLengthMean(boolean lengthLowerThanLengthMean) {
-        isLengthLowerThanLengthMean = lengthLowerThanLengthMean;
+    public void setLastCharAlpha(boolean lastCharAlpha) {
+        isLastCharAlpha = lastCharAlpha;
     }
 
-    public boolean isTitle() {
-        return isTitle;
+    public boolean isAllWordsInitCap() {
+        return isAllWordsInitCap;
     }
 
-    public void setTitle(boolean title) {
-        isTitle = title;
+    public void setAllWordsInitCap(boolean allWordsInitCap) {
+        isAllWordsInitCap = allWordsInitCap;
     }
 
-    public boolean isHasMoreThanTwoWords() {
-        return hasMoreThanTwoWords;
+    public boolean isContainsBetweenTwoAndThreeWords() {
+        return containsBetweenTwoAndThreeWords;
     }
 
-    public void setHasMoreThanTwoWords(boolean hasMoreThanTwoWords) {
-        this.hasMoreThanTwoWords = hasMoreThanTwoWords;
+    public void setContainsBetweenTwoAndThreeWords(boolean containsBetweenTwoAndThreeWords) {
+        this.containsBetweenTwoAndThreeWords = containsBetweenTwoAndThreeWords;
+    }
+
+    public boolean isAuthor() {
+        return isAuthor;
+    }
+
+    public void setAuthor(boolean author) {
+        isAuthor = author;
     }
 }

@@ -1,7 +1,7 @@
 package com.licenta.licenta.controllers;
 
+import com.licenta.licenta.representations.resp.TitleResponse;
 import com.licenta.licenta.service.BayesNaiveService;
-import com.licenta.licenta.service.TrainDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,24 +11,20 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
-public class MainController {
+public class TitleController {
 
-    private final TrainDataService trainDataService;
     private final BayesNaiveService bayesNaiveService;
-
     @Autowired
-    public MainController(TrainDataService trainDataService, BayesNaiveService bayesNaiveService) {
-        this.trainDataService = trainDataService;
+    public TitleController(BayesNaiveService bayesNaiveService) {
         this.bayesNaiveService = bayesNaiveService;
     }
 
-    @RequestMapping(value = "/trainData", method = RequestMethod.POST)
-    public ResponseEntity<String> trainData(@RequestPart(value = "file") MultipartFile pdfFile){
-        trainDataService.trainDataForTitle(pdfFile);
-//        trainDataService.trainDataForAuthor();
-        return new ResponseEntity<>("Data was trained", HttpStatus.OK);
+    @RequestMapping(value = "/title", method = RequestMethod.POST)
+    public ResponseEntity<List<TitleResponse>> extractTitle(@RequestPart(value = "file") MultipartFile pdfFile){
+        List<TitleResponse> titleResponseList = bayesNaiveService.titleNaiveBayes(pdfFile);
+        return new ResponseEntity<>(titleResponseList, HttpStatus.OK);
     }
-
-
 }
